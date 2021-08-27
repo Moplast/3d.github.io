@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>3D Spatial Features for Multi-channel Target Speech Separation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h2 align="center">3D Spatial Features for Multi-channel Target Speech Separation</h2>
+											<!-- <p>Authors: Rongzhi Gu, Shi-Xiong Zhang, Meng Yu,Dong Yu</p> -->
+										</header>
+										<p><b>Abstract</b>:
+											The use of speaker's directional information for speech separation and speech recognition has demonstrated the state-of-the-art performances on multi-talker scenarios. One major limitation of previous approaches of using speaker's directional information is the significant performance degradation when the coming directions of simultaneous speech are close. 
+											To address these challenges, this paper proposed a set of new three-dimensional (3D) spatial features for target speech separation, by leveraging all the 3D location information of the target speaker, including azimuth, elevation, and the distance to the microphone array center. Previous works in this area are extended in two important directions. First, the traditional 1D <i>directional</i> features are generalized to 3D <i>spatial</i>  features. Thus more discriminative spatial diversity between speakers is achieved. Second, to unleash the full power of these 3D spatial features, a microphone pair-wise attention model is also proposed.  
+											The proposed features and models were evaluated on both simulated reverberant datasets and real recordings under near and far-field conditions. Experimental results show that both proposed 3D spatial features and attention models can significantly improve the separation performance as well as reducing the recognition error rate. 
+										</p>
+										<!--
+										<ul class="actions">
+											<li><a href="#" class="button big">Learn More</a></li>
+										</ul>-->
+										<div align="center">
+										<img src="images/system.jpg" style="background-repeat:no-repeat; background-size:contain" width="40%" alt=""  />
+										</div>
+										
+									</div>
+									
+								</section>
+
+
+
+							<!-- Section -->
+								<section id="accuracy">
+									<header class="major">
+										<h2>Effects of extraction accuracy</h2>
+									</header>
+
+										<div class="centent">
+											<p>We report the performances when the spatial features are extracted with deviated azimuth, elevation or distance. </p>
+											<p>It can be observed that the spatial feature based on azimuth, elevation and distance is quite sensitive to the extraction accuracy, compared to other spatial features. To alleviate this problem, we can look for some strategies. For example, data augmentation such as introducing the error during training (the red line in Azimuth figure). Also, we can sample some locations in the adjacent regions around the given location (θ,φ,d), and design an attention mechanism to selectively focus on these candidate locations. We adopt this strategy in the experiments on real-recorded data. </p>
+										</div>
+												
+									<div class="posts">
+										<article>			
+											<table cellspacing="50" style="width: 50%">
+												<thead>
+													<tr>
+														<th><center>Azimuth</center> </th>
+														<th><center>Elevation</center> </th>
+														<th><center>Distance</center> </th>
+														
+													</tr>
+													
+												</thead>
+												<thead>
+													<tr style="border-top:1px solid black">
+														<td><img src="images/azimuth.png" width=500px>
+														</img></td>
+
+														<td>
+											<div class="img">
+											<img src="images/elevation.png" width=500px></img>
+											</div>
+										</td>
+										<td>
+											<div class="img">
+												<img src="images/distance.png" width=500px></img>
+												</div>
+										</td>
+													
+									</thead>
+											</table>
+
+											<!--<ul class="actions">
+												<li><a href="#" class="button">More</a></li>
+											</ul>-->
+										</article>
+									</div>
+								</section>
+								
+
+				<!-- Section -->
+				<section id="exp">
+					<header class="major">
+						<h2>Experiments on real-recorded data</h2>
+					</header>
+							<div class="content">
+								<h3>Scenario</h3>
+								<p>In order to evaluate our proposed method in real-life applications, we consider a in-car scenario. As shown in figure, there are 4 potential speakers and corresponding regions in a car: the main driver (S1), the co-driver (S2) and two passengers (S3 & S4) sitting in the back. We  take the main driver's voice as the target. It can be seen from the top view that the azimuths of the main driver (S1) and the passenger in the back seat (S3) are very close. In this case, it is difficult to distinguish these two speakers with the spatial feature only based on azimuth.
+								</p>
+								<div class="img" align="center">
+									<img style="margin-bottom:50px" src="images/car.png" width=700px></img> 
+									<img style="margin-left:100px" src="images/top_view.png" width=700px></img>
+								</div>
+								
+								<div class="text" align="center">
+									Fig.1 The detailed information of the car.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									Fig.2 4 speakers corresponding to 4 regions in the car.
+								</div>
+								
+							</div>
+
+					
+					<div class="content" style="margin-top:50px">
+						<h3>Spatial Features</h3>
+						<p>We assume that the main driver (as well as other passengers) will be located within a limited region (a 3D box as shown in the figure, each dot indicates a potential speaker position). The length, width, height and corresponding distance to the microphone array center of this box, are measured according to the specific car. With this information, we can calcalate the expectation center point of the 3D box, and consider the center point as the speaker location. </p>
+						<p><b>Spatial feature based on azimuth</b>: 								
+							The spatial features based on azimuth that fed into the separation network are always extracted using the fixed center locations of 4 regions (boxes). As shown in the figure, the center locations of four regions are marked with the cross. Only the azimuths of the center points are used to calculate the spatial features. 
+						</p>
+						<p><b>Spatial feature based on azimuth, elevation and distance</b>: 
+							With the availability of elevation and distance, except the center points, we can also sample 8 vertexes of the 3D box to obtain a full spatial view of the whole region. As shown in the figure, 4 (regions) × 9 (spatial positions) spatial features that computed from azimuth, elevation and distance will be extracted and input to the separation model. We design a simple attention mechanism (i.e., weight-and-sum) to make the model selectively focus on useful spatial positions. 
+						</p>
+						<div class="img" align="center">
+						<img src="images/side_view.png" style="background-repeat:no-repeat; background-size:contain" width="50%" alt=""/>
+						</div>
+					</div>
+
+					<div class="features" style="margin-top:50px">
+					
+						<article>
+							<div class="content">
+								<h3>Data Preparation</h3>
+									<p> In order to train a model to separate the voice of the main driver, we simulate a reverberant noisy dataset. The room size matches that of the car and the microphone array is placed at the car head. We use a dual mic with 11.8cm spacing.</p>
+									<p>The simulated dataset contains 90,000 noisy and reverberant N-speaker mixtures for training, validation and testing, where N is randomly selected from [2, 3]. The Multi-channel audio signals are generated by convolving single-channel signals with RIRs simulated by image-source method (ISM).</p>								
+							</div>
+						</article>
+					<article>
+						<div class="content">
+							<h3>Evaluating </h3>
+							<p> <b>on simulated data</b>: results ready. will be updated. </p>
+							<p>
+								<b>on real-recorded data</b>: We recorded 25-minute 2-channel speech data in the specific car, where the AISHELL speech are replayed according to pre-arranged timestamps in each region. Also, the car's player is playing loud music, which is not simulated in the training data. This means there will be a mismatch between the training and testing phase. We calcalate word error rate of each utterance according to the AISHELL transcript. 
+								Compared to the unprocessed mixture with WER of 108.71%, the WERs for SF based on azimuth and SF based on azimuth, elevation and distance are 45.90% and 42.74%, respectively. 
+							</p>
+						</div>
+					</article>
+				</div>
+
+
+			</section>
+		<!-- Section -->
+			<section id="rlt">
+				<header class="major">
+					<h2>Samples on real-recorded data with Echo</h2>
+				</header>
+				<div class="posts">
+					<article>
+						<!--a href="#" class="image"><img src="images/pic02.jpg" alt="" /></--a>-->
+						<table cellspacing="50" style="width:500">
+							<thead>
+								<tr>
+									<th><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mixture&nbsp;(1st&nbsp;channel)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center> </th>
+									<th><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GT&nbsp;&nbsp;transcript&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></th>
+									<th><center>SF(θ)</center> </th>
+									<th><center>SF(θ,φ,d)</center> </th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr style="border-top:1px solid black">
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/mix/2_05_400asr_158.75-162.16.wav" ></audio></td>
+									<td></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D/2_05_400asr_158.75-162.16.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D/2_05_400asr_158.75-162.16.wav" ></audio></td>
+								</tr>
+
+								<tr style="border-top:1px solid black;font-size: small" >
+									<td> <center>ASR: 碍事我想关联的啊做策划</center></td>
+									<td> <center>按顺序播放歌单</center> </td>
+									<td><center><font color="red">碍事我孔子家</font></center></td>
+									<td> <center>按顺序播放歌单</center></td>
+								</tr>
+
+								<tr style="border-top:1px solid black">
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/mix/2_05_400asr_817.92-821.33.wav" ></audio></td>
+									<td ></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D/2_05_400asr_817.92-821.33.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D/2_05_400asr_817.92-821.33.wav" ></audio></td>
+								</tr>
+
+								<tr style="border-top:1px solid black;font-size: small">									
+									<td> <center>ASR: 欺负我打不到你得马上给我说 </center></td>
+									<td> <center>拨打顺丰快递的电话 </center></td>
+									<td> <center><font color="red">我</font>打<font color="red">中通</font>快递的电话</center></td>
+									<td> <center><font color="red">请</font>拨打顺丰快递的电话</center></td>
+								</tr>
+
+								<tr style="border-top:1px solid black">
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/mix/2_05_400asr_1375.29-1379.4.wav" ></audio></td>
+									<td></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D/2_05_400asr_1375.29-1379.4.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D/2_05_400asr_1375.29-1379.4.wav" ></audio></td>
+								</tr>
+
+								<tr style="border-top:1px solid black;font-size: small">
+									<td> <center>ASR: 大学大甚至会定要要经历的开馆加下雨开心</center></td>
+									<td> <center>零零四幺幺今天的开盘价格 </center></td>
+									<td> <center> <font color="red">□□□瑶瑶</font>今天的开盘价<font color="red">□</font></center></td>
+									<td> <center><font color="red">□□</font>四幺幺今天的开盘价格</center></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<!--<ul class="actions">
+							<li><a href="#" class="button">More</a></li>
+						</ul>-->
+					</article>
+				</div>
+			</section>
+
+							
+					
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
