@@ -26,21 +26,25 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h2 align="center">3D Spatial Features for Multi-channel Target Speech Separation</h2>
-											<!-- <p>Authors: Rongzhi Gu, Shi-Xiong Zhang, Meng Yu,Dong Yu</p> -->
-											<p><center>Anonymous Authors</center></p>
+											<h2 align="center">3D NEURAL BEAMFORMING FOR MULTI-CHANNEL SPEECH SEPARATION AGAINST LOCATION UNCERTAINTY</h2>
+											<p><center>Rongzhi Gu, Shi-Xiong Zhang, Dong Yu</center></p>
 										</header>
 										<p><b>Abstract</b>:
-											The use of speaker's directional information for speech separation and speech recognition has demonstrated the state-of-the-art performances on multi-talker scenarios. One major limitation of previous approaches of using speaker's directional information is the significant performance degradation when the coming directions of simultaneous speech are close. 
-											To address these challenges, this paper proposed a set of new three-dimensional (3D) spatial features for target speech separation, by leveraging all the 3D location information of the target speaker, including azimuth, elevation, and the distance to the microphone array center. Previous works in this area are extended in two important directions. First, the traditional 1D <i>directional</i> features are generalized to 3D <i>spatial</i>  features. Thus more discriminative spatial diversity between speakers is achieved. Second, to unleash the full power of these 3D spatial features, a microphone pair-wise attention model is also proposed.  
-											The proposed features and models were evaluated on both simulated reverberant datasets and real recordings under near and far-field conditions. Experimental results show that both proposed 3D spatial features and attention models can significantly improve the separation performance as well as reducing the recognition error rate. 
-										</p>
+											Multi-channel speech separation using speaker’s directional information has demonstrated significant gains over blind separation. However, it has two limitations.
+											First, substantial performance degradation is observed when the coming directions of two sounds are close.
+											Second, the result highly relies on the precise estimation of the speaker’s direction.
+											To overcome these issues, this paper proposed 3D features and anassociated 3D neural beamformer for speech separation.
+											Previous works in this area are extended in two important directions.
+											First, the traditional 1D directional beam patterns are generalized to 3D. This enables to extract speech in any target region in the 3D space.
+											Thus, speakers in the same direction but with different elevations or distances become separable.
+											Second, to handle the speaker location uncertainty, previously proposed spatial feature is extended to a new 3D region feature.
+											The proposed feature and model are evaluated under an in-car scenario. Experimental results demonstrated that the proposed 3D region feature and 3D beamformer can achieve comparable performance to that with ground truth speaker location input.									</p>
 										<!--
 										<ul class="actions">
 											<li><a href="#" class="button big">Learn More</a></li>
 										</ul>-->
 										<div align="center">
-										<img src="images/system.jpg" style="background-repeat:no-repeat; background-size:contain" width="40%" alt=""  />
+										<img src="images/framework.png" style="background-repeat:no-repeat; background-size:contain" width="30%" alt=""  />
 										</div>
 										
 									</div>
@@ -49,10 +53,10 @@
 
 							<section id="3D">
 								<header class="major">
-									<h2>From directional features to spatial features</h2>
+									<h2>From 1D to 3D spatial feature</h2>
 								</header>
 								<div class="posts">
-									<article>			
+									<article>
 										<table cellspacing="50" style="width: 100%" frame=void>											
 											<thead>
 												<tr>
@@ -100,53 +104,58 @@
 							</section>
 
 							<!-- Section -->
-								<section id="accuracy">
-									<header class="major">
-										<h2>Effects of extraction accuracy</h2>
-									</header>
+							<section id="accuracy">
+								<header class="major">
+									<h2>Effects of location uncertainty</h2>
+								</header>
 
-										<div class="centent">
-											<p>We report the performances when the spatial features are extracted with deviated azimuth, elevation or distance. </p>
-											<p>It can be observed that the spatial feature based on azimuth, elevation and distance is quite sensitive to the extraction accuracy, compared to other spatial features. To alleviate this problem, we can look for some strategies. For example, data augmentation such as introducing the error during training (the red line in Azimuth figure). Also, we can sample some locations in the adjacent regions around the given location (θ,φ,d), and design an attention mechanism to selectively focus on these candidate locations. We adopt this strategy in the experiments on real-recorded data. </p>
-										</div>
-												
-									<div class="posts">
-										<article>			
-											<table cellspacing="50" style="width: 50%">
-												<thead>
-													<tr>
-														<th><center>Azimuth</center> </th>
-														<th><center>Elevation</center> </th>
-														<th><center>Distance</center> </th>
-														
-													</tr>
-													
-												</thead>
-												<thead>
-													<tr style="border-top:1px solid black">
-														<td><img src="images/azimuth.png" width=500px>
-														</img></td>
-
-														<td>
-											<div class="img">
-											<img src="images/elevation.png" width=500px></img>
-											</div>
-										</td>
-										<td>
-											<div class="img">
-												<img src="images/distance.png" width=500px></img>
-												</div>
-										</td>
-													
-									</thead>
-											</table>
-
-											<!--<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>-->
-										</article>
+									<div class="centent">
+										<p>We report the performances when the spatial features are extracted with deviated azimuth, elevation or distance. </p>
+										<p>It can be observed that the 3D spatial feature based on azimuth, elevation and distance is quite sensitive to the localization accuracy,
+											compared to other spatial features.
+											To alleviate this problem, we have explored some strategies.
+											For example, data augmentation such as introducing the error during training (the red line in Azimuth figure).</p>
+										<p>
+											In this work, we sample some candidate locations in the adjacent 3d regions around the given location (θ,φ,d), and design an attention mechanism to selectively focus on these candidate locations. </p>
 									</div>
-								</section>
+
+								<div class="posts">
+									<article>
+										<table cellspacing="50" style="width: 50%">
+											<thead>
+												<tr>
+													<th><center>Azimuth</center> </th>
+													<th><center>Elevation</center> </th>
+													<th><center>Distance</center> </th>
+
+												</tr>
+
+											</thead>
+											<thead>
+												<tr style="border-top:1px solid black">
+													<td><img src="images/azimuth.png" width=500px>
+													</img></td>
+
+													<td>
+										<div class="img">
+										<img src="images/elevation.png" width=500px></img>
+										</div>
+									</td>
+									<td>
+										<div class="img">
+											<img src="images/distance.png" width=500px></img>
+											</div>
+									</td>
+
+								</thead>
+										</table>
+
+										<!--<ul class="actions">
+											<li><a href="#" class="button">More</a></li>
+										</ul>-->
+									</article>
+								</div>
+							</section>
 								
 
 				<!-- Section -->
@@ -175,11 +184,14 @@
 					<div class="content" style="margin-top:50px">
 						<h3>Spatial Features</h3>
 						<p>We assume that the main driver (as well as other passengers) will be located within a limited region (a 3D box as shown in the figure below, each dot indicates a potential speaker position). The length, width, height and corresponding distance to the microphone array center of this box, are measured according to the specific car. With this information, we can calcalate the expectation center point of the 3D box, and consider the center point as the speaker location. </p>
-						<p><b>Spatial feature based on azimuth</b>: 								
+						<p><b>1D Spatial feature</b>:
 							The spatial features based on azimuth that fed into the separation network are always extracted using the fixed center locations of 4 regions (boxes). As shown in the figure, the center locations of four regions are marked with the cross. Only the azimuths of the center points are used to calculate the spatial features. 
 						</p>
-						<p><b>Spatial feature based on azimuth, elevation and distance</b>: 
-							With the availability of elevation and distance, except the center points, we can also sample 8 vertexes of the 3D box to obtain a full spatial view of the whole region. As shown in the figure, 4 (regions) × 9 (spatial positions) spatial features that computed from azimuth, elevation and distance will be extracted and input to the separation model. We design a simple attention mechanism (i.e., weight-and-sum) to make the model selectively focus on useful spatial positions. 
+						<p><b>3D Spatial feature</b>:
+							The fixed center locations (including azimuth, elevation and distance) of 4 regions are used to calculate 3D spatial features.
+						</p>
+						<p><b>3D Region feature</b>:
+							We can also sample 8 vertexes of the 3D box to obtain a full spatial view of the whole region. As shown in the figure, 4 (regions) × 9 (spatial positions) spatial features that computed from azimuth, elevation and distance will be extracted and input to the separation model. We design a simple attention mechanism (i.e., weight-and-sum) to make the model selectively focus on useful spatial positions.
 						</p>
 						<div class="img" align="center">
 						<img src="images/side_view.png" style="background-repeat:no-repeat; background-size:contain" width="50%" alt=""/>
@@ -198,45 +210,43 @@
 					<article>
 						<div class="content">
 							<h3>Evaluating </h3>
-							<p> <b>on simulated data</b>: </p>
-							
-							<table cellspacing="50" style="width: 50%">
-								<thead>
-									<tr>
-										<th><center>Feature</center> </th>
-										<th><center>Avg&nbsp;SISDR</center> </th>
-										<th><center>Avg&nbsp;PESQ</center> </th>
-										<th><center>S1+S2</center> </th>
-										<th><center>S1+S2+S3</center> </th>
-										<th><center>S1+S2+S4</center> </th>										
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr style="border-top:1px solid black">
-										<td><center>SF(θ)</center></td>
-										<td><center>8.25</center></td>
-										<td><center>2.62</center></td>
-										<td><center>9.56</center></td>
-										<td><center>6.80</center></td>
-										<td><center>7.10</center></td>
-									</tr>
-									<tr style="border-top:1px solid black">
-										<td><center>SF(θ,φ,d)</center></td>
-										<td><center><b>8.86</b></center></td>
-										<td><center><b>2.66</b></center></td>
-										<td><center>10.07</center></td>
-										<td><center>7.58</center></td>
-										<td><center>7.77</center></td>
-									</tr>
-								</tbody>
-							</table>
-
 							<p>
 								<b>on real-recorded data</b>: We recorded 25-minute 2-channel overlapped speech data in the specific car, where the AISHELL speech are replayed according to pre-arranged timestamps in each region. Also, the car's player is playing loud music, which is not simulated in the training data. This means there will be a mismatch between the training and testing phase. We calcalate word error rate of each utterance according to the AISHELL transcript. 
 
 								Compared to the unprocessed mixture with WER of <b>108.71%</b>, the WERs for SF based on azimuth and SF based on azimuth, elevation and distance are <b>45.90%</b> and <b>42.74%</b>, respectively. 
 							</p>
+
+							<table cellspacing="50" style="width: 80%">
+								<thead>
+									<tr>
+										<th><center>Feature</center> </th>
+										<th><center>1D (θ_c)</center> </th>
+										<th><center>3D (l_c)</center> </th>
+										<th><center>1D (θ_c)</center> </th>
+										<th><center>3D (l_c)</center> </th>
+										<th><center>3D ({l_c}^9)</center> </th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr style="border-top:1px solid black">
+										<td><center>Target</center></td>
+										<td><center>cRM</center></td>
+										<td><center>cRM</center></td>
+										<td><center>AN-BF</center></td>
+										<td><center>AN-BF</center></td>
+										<td><center>AN-BF</center></td>
+									</tr>
+									<tr style="border-top:1px solid black">
+										<td><center>CER (%)</center></td>
+										<td><center>108.7</center></td>
+										<td><center>45.9</center></td>
+										<td><center>42.7</center></td>
+										<td><center>27.4</center></td>
+										<td><center><b>25.5</b></center></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</article>
 				</div>
@@ -256,62 +266,106 @@
 								<tr>
 									<th><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mixture&nbsp;(1st&nbsp;channel)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center> </th>
 									<th><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GT&nbsp;&nbsp;transcript&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></th>
-									<th><center>SF(θ)</center> </th>
-									<th><center>SF(θ,φ,d)</center> </th>
+									<th><center>1D (θ_c)</center> </th>
+									<th><center>3D (l_c)</center> </th>
+									<th><center>1D (θ_c)</center> </th>
+									<th><center>3D ({l_c}^9)</center> </th>
 								</tr>
 							</thead>
 
 							<tbody>
 								<tr style="border-top:1px solid black">
 									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/mix/2_05_400asr_158.75-162.16.wav" ></audio></td>
+										<source src="audio/mix/2_05_400asr_10.94-15.17.wav" ></audio></td>
 									<td></td>
 									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/AF1D/2_05_400asr_158.75-162.16.wav" ></audio></td>
+										<source src="audio/AF1D/2_05_400asr_10.94-15.17.wav" ></audio></td>
 									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/AF3D/2_05_400asr_158.75-162.16.wav" ></audio></td>
+										<source src="audio/AF3D/2_05_400asr_10.94-15.17.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D-BF/2_05_400asr_10.94-15.17.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D-BF/2_05_400asr_10.94-15.17.wav" ></audio></td>
 								</tr>
 
 								<tr style="border-top:1px solid black;font-size: small" >
-									<td> <center>ASR: 碍事我想关联的啊做策划</center></td>
-									<td> <center>按顺序播放歌单</center> </td>
-									<td><center><font color="red">碍事我孔子家</font></center></td>
-									<td> <center>按顺序播放歌单</center></td>
+									<td> <center>ASR: 下深圳市联合收费号码</center></td>
+									<td> <center>深圳今天适合穿外套吗</center></td>
+									<td><center>深圳今天<font color="red">是和小</font>外套吗</center></td>
+									<td><center>深圳今天适合<font color="red">群</font>外套吗</center></td>
+									<td><center>深圳今天适合<font color="red">吃</font>外套吗</center></td>
+									<td> <center>深圳今天适合穿外套吗</center></td>
 								</tr>
 
 								<tr style="border-top:1px solid black">
 									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/mix/2_05_400asr_817.92-821.33.wav" ></audio></td>
-									<td ></td>
-									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/AF1D/2_05_400asr_817.92-821.33.wav" ></audio></td>
-									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/AF3D/2_05_400asr_817.92-821.33.wav" ></audio></td>
-								</tr>
-
-								<tr style="border-top:1px solid black;font-size: small">									
-									<td> <center>ASR: 欺负我打不到你得马上给我说 </center></td>
-									<td> <center>拨打顺丰快递的电话 </center></td>
-									<td> <center><font color="red">我</font>打<font color="red">中通</font>快递的电话</center></td>
-									<td> <center><font color="red">请</font>拨打顺丰快递的电话</center></td>
-								</tr>
-
-								<tr style="border-top:1px solid black">
-									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/mix/2_05_400asr_1375.29-1379.4.wav" ></audio></td>
+										<source src="audio/mix/2_05_400asr_40.68-44.22.wav" ></audio></td>
 									<td></td>
 									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/AF1D/2_05_400asr_1375.29-1379.4.wav" ></audio></td>
+										<source src="audio/AF1D/2_05_400asr_40.68-44.22.wav" ></audio></td>
 									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
-										<source src="audio/AF3D/2_05_400asr_1375.29-1379.4.wav" ></audio></td>
+										<source src="audio/AF3D/2_05_400asr_40.68-44.22.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D-BF/2_05_400asr_40.68-44.22.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D-BF/2_05_400asr_40.68-44.22.wav" ></audio></td>
 								</tr>
 
-								<tr style="border-top:1px solid black;font-size: small">
-									<td> <center>ASR: 大学大甚至会定要要经历的开馆加下雨开心</center></td>
-									<td> <center>零零四幺幺今天的开盘价格 </center></td>
-									<td> <center> <font color="red">□□□瑶瑶</font>今天的开盘价<font color="red">□</font></center></td>
-									<td> <center><font color="red">□□</font>四幺幺今天的开盘价格</center></td>
+								<tr style="border-top:1px solid black;font-size: small" >
+									<td> <center>ASR: 对这些都没有兴趣</center></td>
+									<td> <center>语音可以支持哪些功能</center></td>
+									<td><center>语音<font color="red">配置适中</font></center></td>
+									<td><center>语音<font color="red">呗</font>支持哪些</center></td>
+									<td><center>语音可以支持哪些<font color="red">空的</font></center></td>
+									<td> <center>语音可以支持哪些功能</center></td>
 								</tr>
+
+								<tr style="border-top:1px solid black">
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/mix/2_05_400asr_747.52-752.21.wav" ></audio></td>
+									<td></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D/2_05_400asr_40.68-44.22.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D/2_05_400asr_40.68-44.22.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D-BF/2_05_400asr_40.68-44.22.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D-BF/2_05_400asr_40.68-44.22.wav" ></audio></td>
+								</tr>
+
+								<tr style="border-top:1px solid black;font-size: small" >
+									<td> <center>ASR: 中创业难坚持一次发生</center></td>
+									<td> <center>我想听邓紫棋唱的穿越火线</center></td>
+									<td><center>我想听<font color="red">你</font>唱</center></td>
+									<td><center>我想听<font color="red">你</font>唱</center></td>
+									<td><center>我想听邓紫琴唱的<font color="red">首先</font></center></td>
+									<td> <center>我想听邓紫棋唱的穿越火线</center></td>
+								</tr>
+
+								<tr style="border-top:1px solid black">
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/mix/2_05_400asr_963.47-967.15.wav" ></audio></td>
+									<td></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D/2_05_400asr_963.47-967.15.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D/2_05_400asr_963.47-967.15.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF1D-BF/2_05_400asr_963.47-967.15.wav" ></audio></td>
+									<td><audio controls class="audio-player" preload="metadata" style="width:180px;">
+										<source src="audio/AF3D-BF/2_05_400asr_963.47-967.15.wav" ></audio></td>
+								</tr>
+
+								<tr style="border-top:1px solid black;font-size: small" >
+									<td> <center>ASR: 中创业难坚持一次发生</center></td>
+									<td> <center>采菊东篱下的整首古诗</center></td>
+									<td><center>采菊东篱下<font color="red">到郑州</font></center></td>
+									<td><center>采菊东篱下<font color="red">到郑州</font>古诗</center></td>
+									<td><center>采<font color="red">取公</font>篱下的整首古诗</center></td>
+									<td> <center>采菊东篱下的整首古诗</center></td>
+								</tr>
+
 							</tbody>
 						</table>
 
